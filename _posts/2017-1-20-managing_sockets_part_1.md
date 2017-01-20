@@ -64,7 +64,7 @@ I'm not sure where the code will end up yet, but a crystal lib or app defines a 
 when you init an app.  So we'll start there, and call the framework "Lattice"
 
 
-```ruby
+```crystal
 require "./lattice/*"
 require "kemal"
 require "kemal-session"
