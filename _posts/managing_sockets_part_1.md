@@ -1,3 +1,7 @@
+---
+layout: post
+title: Sockets Are Awesome
+---
 # Part 1: Basic WebSockets
 
 Crystal's standard library contains a phenomenal class that has the opportunity to change the
