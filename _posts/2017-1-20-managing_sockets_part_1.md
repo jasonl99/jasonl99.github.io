@@ -36,7 +36,7 @@ needed.  From this base, we want to accomplish the following goals:
 * All data communicated over the socket is valid JSON.
 
 This won't do anything for displaying data, but it will create a reliable and efficient full
-duplex channel between the server and brower, and it's by its nature asynchronous.
+duplex channel between the server and brower, and it's asynchronous to boot.
 
 We need shards:   `/shard.yml`
 
@@ -145,8 +145,8 @@ on the console, `app_vars.ws.readyState` should be 1 which means the socket is o
 to send and receive data.
 
 But on the server, once we finish the `#ws` method, the socket disappears from our knowledge.
-We have no way to react to incoming data, and no way to send outgoing data.  we've lost any
-reference to the socket that was created.  But we can, inside the context of ws, create a 
+We have no way to react to incoming data, and no way to send outgoing data.  We've lost any
+reference to the socket that was created.  But we can, inside the context of `#ws`, create a 
 block that reacts to incoming data.  It logs it to the terminal, and then thanks the browser
 for sending it.
 
@@ -167,7 +167,7 @@ to the server:
 app_vars.ws.send("Hello from the browser")
 ```
 
-In the terminal, where are app is runnig, you should see
+In the terminal, where are app is running, you should see
 ```
 Just received a message from 94147949214224: Hello from the browser
 ```
