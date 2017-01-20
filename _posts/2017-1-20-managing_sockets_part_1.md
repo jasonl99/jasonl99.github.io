@@ -42,7 +42,7 @@ duplex channel between the server and brower, and it's by its nature asynchronou
 
 We need shards:   `/shard.yml`
 
-```yml
+```yaml
 dependencies:
   kemal:
     github: kemalcr/kemal
