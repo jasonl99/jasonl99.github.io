@@ -41,6 +41,7 @@ This won't do anything for displaying data, but it will create a reliable and ef
 duplex channel between the server and brower, and it's by its nature asynchronous.
 
 We need shards:   `/shard.yml`
+
 ```yml
 dependencies:
   kemal:
@@ -61,6 +62,7 @@ I've already added slang as a template rendering engine, because, well, it's awe
 
 I'm not sure where the code will end up yet, but a crystal lib or app defines a module 
 when you init an app.  So we'll start there, and call the framework "Lattice"
+
 
 ```ruby
 require "./lattice/*"
