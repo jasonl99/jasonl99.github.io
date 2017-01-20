@@ -62,7 +62,7 @@ I've already added slang as a template rendering engine, because, well, it's awe
 I'm not sure where the code will end up yet, but a crystal lib or app defines a module 
 when you init an app.  So we'll start there, and call the framework "Lattice"
 
-```crystal
+```ruby
 require "./lattice/*"
 require "kemal"
 require "kemal-session"
@@ -101,7 +101,7 @@ because we'll need to shortly anyway to tie it to a session.
 
 So there's a few changes to `./src/lattice.cr`
 
-```crystal
+```ruby
   get "/*" do |context|
     context.session.string("phrase",sample_phrase) unless context.session.string?("phrase")
     javascript = <<-JS
@@ -134,7 +134,7 @@ This is happening because we haven't created a route to `/create_socket`.  Which
 just add it to our module where we already have a `#get`.  We add the object_id to make 
 it easy to see different sockets (you can load from firefox and chrome separately, for example).
 
-```crystal
+```ruby
 ws "/create_socket" do |socket|
   puts "Socket created #{socket.object_id}"
 end
@@ -150,7 +150,7 @@ reference to the socket that was created.  But we can, inside the context of ws,
 block that reacts to incoming data.  It logs it to the terminal, and then thanks the browser
 for sending it.
 
-```crystal
+```ruby
   ws "/create_socket" do |socket|
     puts "Socket created #{socket.object_id}"
     socket.on_message do |message|
@@ -177,7 +177,7 @@ react to _incoming_ data on the browser.  Sockets objects in javascript on the b
 have an `#onmessage` event that we can use.  So we need to add this to our
 app_vars.ws object in `./src/lattice.cr`:
 
-```crystal
+```ruby
   javascript = <<-JS
     app_vars = { ws: new WebSocket("ws:" + location.host + "/chat")};
     app_vars.ws.onmessage = function(evt) { console.log(evt.data) };
