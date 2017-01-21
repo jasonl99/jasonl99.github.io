@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Sockets Are Awesome: Part 2
+title: Sockets Are Awesome Part 2
 ---
 In [Sockets Are Awesome: Part 1]({{ site.baseurl }}{% post_url 2017-1-20-managing_sockets_part_1 %})
 we had four goals and accomplished two of them:
