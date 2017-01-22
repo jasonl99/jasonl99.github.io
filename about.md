@@ -4,10 +4,6 @@ title: About
 permalink: /about/
 ---
 
-Some information about you!
-
-### More Information
-
 I've been a software developer since dBase III.  My first real fascination with the power
 of software development came with FoxPro for DOS (yes, I am that old).  I become clear to me
 that developing software was my "thing."  
