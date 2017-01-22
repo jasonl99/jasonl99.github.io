@@ -22,7 +22,7 @@ web server.  At first, I thought this would be easy - just use javascript to fin
 for the session and use that for a url.  Well, there are few odditites of doing that, for example
 `localhost` for some reason [doesn't work](http://stackoverflow.com/questions/1134290/cookies-on-localhost-with-explicit-domain)
 with chrome when reading cookies.  We could work around that, but it also just seems messy -
-we'd have to know the name of the cookie that holds the session identifier (which is conigured
+we'd have to know the name of the cookie that holds the session identifier (which is configured
 with `Session.config`) and that just reeks of stinky code.
 
 So then I started thinking maybe there's a way to capture the session_id somwhere in the chain
@@ -44,7 +44,7 @@ get "/page1" do |context|
 end
 
 ws "/socket1" do |socket|
- # we don't send anything.  We create additional handlers:
+ # This just opens the connection.  We create additional handlers:
  # socket has no useful properties for us.  It has some internal 
  # IO stuff, but no request, context, or response properties.  So 
  # we there's no way in this method to find which browser created
@@ -60,14 +60,15 @@ it did exist at some point earlier in the handler chain.  But it doesn't, so the
 at this point:  1) monkey-patch kemal or crystal's http, or 2) find another way.
 
 It then occurred to me that there's a _very_ simple way to do this, though it does mess with
-encapsulation a bit.  Since we have the session available in the first route, `get "page1"`, 
+encapsulation a bit.  Since we have the session available in the first route, `get "/page1"`, 
 and we already have a little chunk of javascript that creates the socket with 
-`new WebSocket("ws:" + location.host "/socket1")`, we can leverage this a with just a bit more code.
+`new WebSocket("ws:" + location.host "/socket1")`, we can leverage this a with just a bit more 
+code.
 
 Javascript's implementation of websocket (which we'll use in more depth later), has a convenient
 method `#onconnect` which is called the first time a connection is established and ready.  This 
-is perfect!  We can send the session_id right back to the server from the browser.  Here's what the code looks
-like to send a JSON object with a key "sessionID":
+is perfect!  We can use this to send the session_id right back to the server from the browser.  
+Here's what the code looks like to send a JSON object with a key "sessionID":
 
 ```ruby
 get "/page1" do |context|
@@ -84,8 +85,8 @@ get "/page1" do |context|
 
 end
 ```
-The downside to this approach is that every page now needs that little bit of javascript to tie
-socket back to the session.
+The downside to this approach is that every page that has a socket now needs that little bit of 
+javascript -- specific to each session -- to tie socket back to the session.
 
 ### Back To The Server
 
@@ -151,5 +152,5 @@ ws "/socket1" do |socket|
 end
 ```
 
-That's enough for now.  It'll get tied up in Part 3 with a comprehensive SocketManager class that
-even manages routing.
+That's enough for now.  It'll get things all tied together in Part 3 with a comprehensive 
+SocketManager class that even manages routing.
